@@ -1,5 +1,7 @@
 package fr.efrei.pokemon.controller;
 
+import fr.efrei.pokemon.dto.CreatePokemon;
+import fr.efrei.pokemon.dto.UpdatePokemon;
 import fr.efrei.pokemon.models.Pokemon;
 import fr.efrei.pokemon.services.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +43,9 @@ public class PokemonController {
 
     //POST
     @PostMapping
-    public ResponseEntity<Pokemon> create(@RequestBody Pokemon pokemon){
+    public ResponseEntity<Pokemon> create(@RequestBody CreatePokemon pokemon){
         service.save(pokemon);
-        return new ResponseEntity<>(pokemon, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     /*public void create(@RequestBody Pokemon pokemon){
@@ -51,8 +53,8 @@ public class PokemonController {
     }*/
 
     //PUT
-    @PutMapping("/{id}")
-    public ResponseEntity<Pokemon> update(@PathVariable String id, @RequestBody Pokemon pokemon){
+    @PatchMapping("/{id}")
+    public ResponseEntity<Pokemon> update(@PathVariable String id, @RequestBody UpdatePokemon pokemon){
         Pokemon pokemonAModifier = service.findById(id);
 
         if(pokemonAModifier == null){
@@ -73,6 +75,7 @@ public class PokemonController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /*
     //PATCH
     @PatchMapping("/{id}")
     public ResponseEntity<Pokemon> patchUpdate(@PathVariable String id, @RequestBody Pokemon pokemon){
@@ -84,7 +87,7 @@ public class PokemonController {
 
         service.update(id, pokemon);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+    }*/
 
 
 }

@@ -17,13 +17,11 @@ import java.util.List;
 public class TrainerService {
 
     private final TrainerRepository trainerRepository;
-    private final PokemonRepository pokemonRepository;
     private final PokemonService pokemonService;
 
     @Autowired
-    public TrainerService(TrainerRepository trainerRepository, PokemonRepository pokemonRepository, PokemonService pokemonService) {
+    public TrainerService(TrainerRepository trainerRepository, PokemonService pokemonService) {
         this.trainerRepository = trainerRepository;
-        this.pokemonRepository = pokemonRepository;
         this.pokemonService = pokemonService;
     }
 

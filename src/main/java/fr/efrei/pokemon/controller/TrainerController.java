@@ -16,24 +16,22 @@ import java.util.List;
 @RequestMapping("/trainers")
 public class TrainerController {
 
-    private final TrainerService service;
     private final TrainerService trainerService;
 
     @Autowired
-    public TrainerController(TrainerService service, TrainerService trainerService) {
-        this.service = service;
+    public TrainerController(TrainerService trainerService) {
         this.trainerService = trainerService;
     }
 
     //GET
     @GetMapping
     public ResponseEntity<List<Trainer>> findAll(){
-        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(trainerService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}") // /pokemons/id
     public ResponseEntity<Trainer> findById(@PathVariable String id){
-        Trainer trainer = service.findById(id);
+        Trainer trainer = trainerService.findById(id);
         if(trainer == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -43,7 +41,7 @@ public class TrainerController {
     //POST
     @PostMapping
     public ResponseEntity<Trainer> create(@RequestBody CreateTrainer trainer){
-        service.save(trainer);
+        trainerService.save(trainer);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
